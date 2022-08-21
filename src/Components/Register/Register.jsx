@@ -51,35 +51,35 @@ export const Register = () => {
     event.preventDefault();
   }
 
-  // useEffect(() => {
-  //   showPassword ? setTypePassword("text") : setTypePassword("password");
-  //   showConfirmPassword ? setTypeConfirmPassword("text") : setTypeConfirmPassword("password");
-  //   // validar username
-  //   if(regexUsername.test(username)){
-  //       setUserValidate('');
-  //   }else{
-  //       setUserValidate('letters or numbers,without spaces,minimum 3 characters and maximum 20 characters');
-  //   }
-  //   // validar email
-  //   if(regexEmail.test(email)){
-  //       setEmailValidate('');
-  //   } else {
-  //     setEmailValidate('invalid email');
-  //   }
-  //   // validar password
-  //   if(regexPassword.test(password)){
-  //       setPasswordValidate('');
-  //   } else {
-  //     setPasswordValidate('letters, numbers, special characters, minimum 8 characters');
-  //   }
-  //   // validar confirm password
-  //   if(password === confirmPassword){
-  //       setConfirmPasswordValidate('');
-  //   } else {
-  //     setConfirmPasswordValidate('passwords do not match');
-  //   }
+  useEffect(() => {
+    showPassword ? setTypePassword("text") : setTypePassword("password");
+    showConfirmPassword ? setTypeConfirmPassword("text") : setTypeConfirmPassword("password");
+    // validar username
+    if(regexUsername.test(username)){
+        setUserValidate('');
+    }else{
+        setUserValidate('letters or numbers,without spaces,minimum 3 characters and maximum 20 characters');
+    }
+    // validar email
+    if(regexEmail.test(email)){
+        setEmailValidate('');
+    } else {
+      setEmailValidate('invalid email');
+    }
+    // validar password
+    if(regexPassword.test(password)){
+        setPasswordValidate('');
+    } else {
+      setPasswordValidate('letters, numbers, special characters, minimum 8 characters');
+    }
+    // validar confirm password
+    if(password === confirmPassword){
+        setConfirmPasswordValidate('');
+    } else {
+      setConfirmPasswordValidate('passwords do not match');
+    }
     
-  // },[showPassword, showConfirmPassword, username,email, password, confirmPassword]);
+  },[showPassword, showConfirmPassword, username,email, password, confirmPassword]);
 
 
   return (
