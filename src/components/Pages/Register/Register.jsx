@@ -1,0 +1,62 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Header } from '../../layouts/Header/Header'
+import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { Footer } from '../../layouts/Footer/Footer';
+
+export const Register = () => {
+  return (
+    <div>
+        <Header/>
+        <div className="formulario">
+              <div className="welcome-back">
+                  <div className="message">
+                    <h2>Bienvenido</h2>
+                    <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
+                    <Link to="/login"> 
+                      <button className="signUpBtn">Iniciar Sesion</button>
+                    </Link>
+                  </div>
+              </div>
+            <div>
+              <form className="formulario2">
+                <h1 className="titleReg">Registro</h1><br />
+                <div className="iconos">
+                  <div className="border-icon">
+                    <FaFacebook/>
+                  </div>
+                  <div className="border-icon">
+                    <FaInstagram/>
+                  </div>
+                  <div className="border-icon">
+                    <FaLinkedin/>
+                  </div>
+                </div><br />
+                <div className="formularioReg">
+                  <label for="inputUser" class="labelsReg">User name</label>
+                    <input name="name" type="text" class="form-input" placeholder="User name" autocomplete="off" required/>
+
+                  <label for="exampleInputEmail1" class="labelsReg"><br/>Email</label>
+                    <input name="correo" type="email" class="form-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Example@" autocomplete="off" required/>
+
+                  <label for="inputPassword" class="labelsReg"><br/>Password</label>
+                    <input name="password" type="password" class="form-input" id="inputPassword" placeholder="Password"/>
+
+                  <label for="inputPassword" class="labelsReg"><br/>Confirm password</label>
+                    <input name="password" type="password" class="form-input" id="inputPassword" placeholder="Confirm your password"/>
+                  <br />
+                  <div className="checkTyC">
+                    <input type="checkbox"/><p>Haz click aqui para aceptar nuestros<br/>terminos y condiciones.</p>
+                  </div>
+                  
+                  <div className="submitReg">
+                    <button type="submit" class="submitReg2">Registrarse</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
+        <Footer/>
+    </div>
+  )
+}
