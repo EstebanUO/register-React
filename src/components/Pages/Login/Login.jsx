@@ -24,7 +24,7 @@ export const Login = () => {
                 </div><br />
                 <div className="formularioLog">
                   <label for="exampleInputEmail1" class="labelsReg"><br/>Email</label>
-                    <input name="correo" type="email" class="form-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Example@" autocomplete="off" required/>
+                    <input name="correo" type="email" class="form-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Example@" required/>
 
                   <label for="inputPassword" class="labelsReg"><br/>Password</label>
                     <input name="password" type="password" class="form-input" id="inputPassword" placeholder="Password"/>
