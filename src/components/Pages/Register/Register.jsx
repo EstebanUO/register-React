@@ -22,9 +22,11 @@ export const Register = () => {
   const onPassword = (event) => {setPassword(event.target.value)};
   const onConfirmPass = (event) => {setConfirmPassword(event.target.value)};
   const [showPass, setShowPass] = useState(false);
+  
   const iconShow = () => {
     setShowPass(!showPass)
   }
+
   const onSubmitForm = (event) => {
     event.preventDefault()
     setValidName(userName);
@@ -32,35 +34,35 @@ export const Register = () => {
   }
 
   //UseEffect
-  // useEffect(() => {
-  //   //UserName Validacion
-  //   if(validName.indexOf('`')!== -1 || validName.indexOf('.')!== -1 || validName.indexOf('@')!== -1 || validName.indexOf('!')!== -1 || validName.indexOf('%')!== -1 || validName.indexOf('$')!== -1 || /\s/.test(validName)){
-  //     document.getElementById('validUserName').textContent = 'Usuario Invalido: solo se permiten letras o numeros, sin espacios, minimo 3 caracteres y maximo 20.';
-  //   }else{
-  //     document.getElementById('validUserName').textContent = '';
-  //   };
+  useEffect(() => {
+    //UserName Validacion
+    if(validName.indexOf('`')!== -1 || validName.indexOf('.')!== -1 || validName.indexOf('@')!== -1 || validName.indexOf('!')!== -1 || validName.indexOf('%')!== -1 || validName.indexOf('$')!== -1 || /\s/.test(validName)){
+      document.getElementById('validUserName').textContent = 'Usuario Invalido: solo se permiten letras o numeros, sin espacios, minimo 3 caracteres y maximo 20.';
+    }else{
+      document.getElementById('validUserName').textContent = '';
+    }
     
-  //   // Email Validacion
-  //   if (validEmail.indexOf('.')=== -1 || validEmail.indexOf('@')=== -1 || /\s/.test(validEmail)) {
-  //     document.getElementById('validemail').textContent = 'Email Invalido';
-  //   }else{
-  //     document.getElementById('validemail').textContent = '';
-  //   };
+    // Email Validacion
+    if (validEmail.indexOf('.')=== -1 || validEmail.indexOf('@')=== -1 || /\s/.test(validEmail)) {
+      document.getElementById('validemail').textContent = 'Email Invalido';
+    }else{
+      document.getElementById('validemail').textContent = '';
+    }
 
-  //   // Password Validacion
-  //   if (confirmPassword === password) {
-  //     document.getElementById('buttonSend').removeAttribute('disabled')
-  //   }else{
-  //     document.getElementById('buttonSend').setAttribute('disabled','true')
-  //   };
+    // Password Validacion
+    if (confirmPassword === password) {
+      document.getElementById('buttonSend').removeAttribute('disabled')
+    }else{
+      document.getElementById('buttonSend').setAttribute('disabled','true')
+    }
 
-  //   if (password === confirmPassword) {
-  //     document.getElementById('validPassword').textContent = '';
-  //   }else{
-  //     document.getElementById('validPassword').textContent = 'Las contraseñas no coinciden!!';
-  //   };
+    if (password === confirmPassword) {
+      document.getElementById('validPassword').textContent = '';
+    }else{
+      document.getElementById('validPassword').textContent = 'Las contraseñas no coinciden!!';
+    }
 
-  // }, [validName, validEmail, confirmPassword, password])
+  }, [validName, validEmail, confirmPassword, password]);
   
 
   return (
@@ -93,19 +95,20 @@ export const Register = () => {
                 <div className="formularioReg">
                   <label for="inputUser" class="labelsReg">User name</label>
                     <input name="name" type="text" class="form-input" placeholder="User name" value={userName} onChange={onUserName} required/>
-
+                    <p id="validUserName"></p>
                   <label for="exampleInputEmail1" class="labelsReg"><br/>Email</label>
                     <input name="correo" type="email" class="form-input" id="exampleInputEmail1" value={email} onChange={onEmail} aria-describedby="emailHelp" placeholder="Example@" required/>
-
+                    <p id="validemail"></p>
                   <label for="inputPassword" class="labelsReg"><br/>Password</label>
                   <div className="showPass">
-                    <input name="password" type="password" class="form-input" placeholder="Password" value={password} onChange={onPassword}/>
-                    <button className='button-show' onClick={iconShow}>{showPass ? <BsEyeFill />:<BsEyeSlashFill />}</button>
+                    <input name="password" type={showPass ? "password" : "text"} class="form-input" placeholder="Password" value={password} onChange={onPassword}/>
+                    <button className='button-show' onClick={iconShow}>{showPass ? <BsEyeFill />:<BsEyeSlashFill />}</button><br />
+                    <p id="validPassword"></p>
                   </div>
-                    
 
                   <label for="inputPassword" class="labelsReg"><br/>Confirm password</label>
                     <input name="password" type="password" class="form-input" placeholder="Confirm your password" value={confirmPassword} onChange={onConfirmPass}/>
+                    <p id="validPassword"></p>
                   <br />
                   <div className="checkTyC">
                     <input type="checkbox"/><p>Haz click aqui para aceptar nuestros<br/>terminos y condiciones.</p>
