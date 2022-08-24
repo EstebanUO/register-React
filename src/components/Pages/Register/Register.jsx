@@ -101,10 +101,10 @@ export const Register = () => {
                     <p id="validemail"></p>
                   <label for="inputPassword" class="labelsReg"><br/>Password</label>
                   <div className="showPass">
-                    <input name="password" type={showPass ? "password" : "text"} class="form-input" placeholder="Password" value={password} onChange={onPassword}/>
+                    <input name="password" type={showPass ? "text" : "password"} class="form-input" placeholder="Password" value={password} onChange={onPassword}/>
                     <button className='button-show' onClick={iconShow}>{showPass ? <BsEyeFill />:<BsEyeSlashFill />}</button><br />
-                    <p id="validPassword"></p>
                   </div>
+                  <p id="validPassword"></p>
 
                   <label for="inputPassword" class="labelsReg"><br/>Confirm password</label>
                     <input name="password" type="password" class="form-input" placeholder="Confirm your password" value={confirmPassword} onChange={onConfirmPass}/>
