@@ -38,8 +38,8 @@ export const Login = () => {
             <div className="welcome-back">
                   <div className="message">
                     <h2>Bienvenido</h2>
-                    <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
-                    <Link to="/register"> 
+                    <p>Si ya tienes una cuenta por favor registrate aqui</p>
+                    <Link to="/register" className="aaa"> 
                       <button className="signUpBtn">Registrarse</button>
                     </Link>
                   </div>

@@ -88,6 +88,24 @@ h1{
   background-color: #620404;
 }
 
+.border-icon {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border: solid thin white;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  transition: all .3s ease-in;
+}
+
+.border-icon:hover {
+  background-color: #620404;
+  cursor: pointer;
+}
+
 .labelsReg{
   font-weight: bold;
 }
