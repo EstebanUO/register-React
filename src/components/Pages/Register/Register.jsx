@@ -11,7 +11,7 @@ export const Register = () => {
   //Constantes
   const [userName, setUserName] = useState("");
   const [validName, setValidName] = useState("");
-  const [email, setEmail] = useState("");
+  const [email2, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(".@")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -23,14 +23,15 @@ export const Register = () => {
   const onConfirmPass = (event) => {setConfirmPassword(event.target.value)};
   const [showPass, setShowPass] = useState(false);
   
-  const iconShow = () => {
+  const iconShow = (event) => {
+    event.preventDefault();
     setShowPass(!showPass)
   }
 
   const onSubmitForm = (event) => {
     event.preventDefault()
     setValidName(userName);
-    setValidEmail(email);
+    setValidEmail(email2);
   }
 
   //UseEffect
@@ -63,7 +64,6 @@ export const Register = () => {
     }
 
   }, [validName, validEmail, confirmPassword, password]);
-  
 
   return (
     <div>
@@ -96,26 +96,28 @@ export const Register = () => {
                   <label for="inputUser" class="labelsReg">User name</label>
                     <input name="name" type="text" class="form-input" placeholder="User name" value={userName} onChange={onUserName} required/>
                     <p id="validUserName"></p>
+                    
                   <label for="exampleInputEmail1" class="labelsReg"><br/>Email</label>
-                    <input name="correo" type="email" class="form-input" id="exampleInputEmail1" value={email} onChange={onEmail} aria-describedby="emailHelp" placeholder="Example@" required/>
+                    <input name="correo" type="email" class="form-input" id="exampleInputEmail1" value={email2} onChange={onEmail} placeholder="Example@" required/>
                     <p id="validemail"></p>
+
                   <label for="inputPassword" class="labelsReg"><br/>Password</label>
                   <div className="showPass">
-                    <input name="password" type={showPass ? "text" : "password"} class="form-input" placeholder="Password" value={password} onChange={onPassword}/>
+                    <input name="password" type={showPass ? "text" : "password"} class="form-input" placeholder="Password" value={password} onChange={onPassword} required minLength={8}/>
                     <button className='button-show' onClick={iconShow}>{showPass ? <BsEyeFill />:<BsEyeSlashFill />}</button><br />
                   </div>
                   <p id="validPassword"></p>
 
                   <label for="inputPassword" class="labelsReg"><br/>Confirm password</label>
-                    <input name="password" type="password" class="form-input" placeholder="Confirm your password" value={confirmPassword} onChange={onConfirmPass}/>
+                    <input name="password" type="password" class="form-input" placeholder="Confirm your password" value={confirmPassword} onChange={onConfirmPass} required minLength={8}/>
                     <p id="validPassword"></p>
                   <br />
                   <div className="checkTyC">
-                    <input type="checkbox"/><p>Haz click aqui para aceptar nuestros<br/>terminos y condiciones.</p>
+                    <input type="checkbox" required/><p>Haz click aqui para aceptar nuestros<br/>terminos y condiciones.</p>
                   </div>
                   
                   <div className="submitReg">
-                    <button type="submit" id="buttonSend" class="submitReg2">Registrarse</button>
+                    <input type="submit" id="buttonSend" class="submitReg2"/>
                   </div>
                 </div>
               </form>

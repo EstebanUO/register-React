@@ -23,11 +23,11 @@ export const Login = () => {
                   </div>
                 </div><br />
                 <div className="formularioLog">
-                  <label for="exampleInputEmail1" class="labelsReg"><br/>Email</label>
-                    <input name="correo" type="email" class="form-input" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Example@" required/>
+                  <label for="exampleInputEmail1" class="labelsReg"><br/>User name</label>
+                    <input name="username" type="text" class="form-input" id="exampleInputEmail1" placeholder="User name" required/>
 
                   <label for="inputPassword" class="labelsReg"><br/>Password</label>
-                    <input name="password" type="password" class="form-input" id="inputPassword" placeholder="Password"/>
+                    <input name="password" type="password" class="form-input" id="inputPassword" placeholder="Password" minLength={8}/>
                   
                   <div className="submitReg">
                     <button type="submit" class="submitReg2">Iniciar Sesion</button>

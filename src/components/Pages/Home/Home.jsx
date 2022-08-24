@@ -1,7 +1,28 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Header } from '../../layouts/Header/Header'
 
 export const Home = () => {
+
+  //Metodo GET con axios
+  const [apiList, setapiList] = useState("")
+
+  useEffect(() => {
+    const apiURL = "https://backend-edw.herokuapp.com/usuarios"
+
+    const asyncFetchData = async() =>{
+      const res = await fetch(apiURL)
+      const data = await res.json()
+      console.log(data);
+    }
+    asyncFetchData();
+
+  }, [])
+  
+  
+
+
+
+
   return (
     <div>
         <Header/>
@@ -14,6 +35,7 @@ export const Home = () => {
                       cum voluptatem eos incidunt eligendi velit, 
                       labore ullam veritatis!
                   </p>
+                  <p className="lista"></p>
             </div>    
     </div>
   )
