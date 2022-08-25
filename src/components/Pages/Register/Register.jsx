@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { Header } from '../../layouts/Header/Header'
@@ -15,6 +16,8 @@ export const Register = () => {
   const [validEmail, setValidEmail] = useState(".@")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const regexEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  const regexUsername = /^[a-zA-Z0-9]{3,20}$/;
 
   //Funciones
   const onUserName = (event) => {setUserName(event.target.value)};
@@ -28,42 +31,45 @@ export const Register = () => {
     setShowPass(!showPass)
   }
 
-  const onSubmitForm = (event) => {
-    event.preventDefault()
-    setValidName(userName);
-    setValidEmail(email2);
-  }
-
   //UseEffect
   useEffect(() => {
     //UserName Validacion
-    if(validName.indexOf('`')!== -1 || validName.indexOf('.')!== -1 || validName.indexOf('@')!== -1 || validName.indexOf('!')!== -1 || validName.indexOf('%')!== -1 || validName.indexOf('$')!== -1 || /\s/.test(validName)){
-      document.getElementById('validUserName').textContent = 'Usuario Invalido: solo se permiten letras o numeros, sin espacios, minimo 3 caracteres y maximo 20.';
+    if(regexUsername.test(userName)){
+      setValidName('')
     }else{
-      document.getElementById('validUserName').textContent = '';
+      setValidName("Solo letras y numeros, no se permiten espacios, minimo 3 caracteres y maximo 20.")
     }
     
     // Email Validacion
-    if (validEmail.indexOf('.')=== -1 || validEmail.indexOf('@')=== -1 || /\s/.test(validEmail)) {
-      document.getElementById('validemail').textContent = 'Email Invalido';
+    if (regexEmail.test(email2)) {
+      setValidEmail('')
     }else{
-      document.getElementById('validemail').textContent = '';
+      setValidEmail('Email invalido')
     }
 
-    // Password Validacion
-    if (confirmPassword === password) {
-      document.getElementById('buttonSend').removeAttribute('disabled')
-    }else{
-      document.getElementById('buttonSend').setAttribute('disabled','true')
-    }
-
+    //Password Validacion
     if (password === confirmPassword) {
       document.getElementById('validPassword').textContent = '';
     }else{
       document.getElementById('validPassword').textContent = 'Las contraseñas no coinciden!!';
     }
 
-  }, [validName, validEmail, confirmPassword, password]);
+  }, [validName, validEmail, confirmPassword, password, email2, userName, password]);
+
+  const axiosApi = () => {
+    axios.post('https://backend-edw.herokuapp.com/usuario', 
+    {
+      "username": userName,
+      "password": password,
+      "name": email2,
+    })
+    .then (response => {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   return (
     <div>
@@ -79,7 +85,7 @@ export const Register = () => {
                   </div>
               </div>
             <div>
-              <form className="formulario2" onSubmit={onSubmitForm}>
+              <div className="formulario2">
                 <h1 className="titleReg">Registro</h1><br />
                 <div className="iconos">
                   <div className="border-icon">
@@ -94,22 +100,22 @@ export const Register = () => {
                 </div><br />
                 <div className="formularioReg">
                   <label for="inputUser" class="labelsReg">User name</label>
-                    <input name="name" type="text" class="form-input" placeholder="User name" value={userName} onChange={onUserName} required/>
-                    <p id="validUserName"></p>
+                    <input name="name" type="text" class="form-input" placeholder="User name" value={userName} onChange={onUserName} />
+                    <p>{validName}</p>
                     
                   <label for="exampleInputEmail1" class="labelsReg"><br/>Email</label>
-                    <input name="correo" type="email" class="form-input" id="exampleInputEmail1" value={email2} onChange={onEmail} placeholder="Example@" required/>
-                    <p id="validemail"></p>
+                    <input name="correo" type="email" class="form-input" id="exampleInputEmail1" value={email2} onChange={onEmail} placeholder="Example@" />
+                    <p>{validEmail}</p>
 
                   <label for="inputPassword" class="labelsReg"><br/>Password</label>
                   <div className="showPass">
-                    <input name="password" type={showPass ? "text" : "password"} class="form-input" placeholder="Password" value={password} onChange={onPassword} required minLength={8}/>
+                    <input name="password" type={showPass ? "text" : "password"} class="form-input" placeholder="Password" value={password} onChange={onPassword} />
                     <button className='button-show' onClick={iconShow}>{showPass ? <BsEyeFill />:<BsEyeSlashFill />}</button><br />
                   </div>
                   <p id="validPassword"></p>
 
                   <label for="inputPassword" class="labelsReg"><br/>Confirm password</label>
-                    <input name="password" type="password" class="form-input" placeholder="Confirm your password" value={confirmPassword} onChange={onConfirmPass} required minLength={8}/>
+                    <input name="password" type="password" class="form-input" placeholder="Confirm your password" value={confirmPassword} onChange={onConfirmPass} />
                     <p id="validPassword"></p>
                   <br />
                   <div className="checkTyC">
@@ -117,10 +123,10 @@ export const Register = () => {
                   </div>
                   
                   <div className="submitReg">
-                    <input type="submit" id="buttonSend" class="submitReg2"/>
+                    <button onClick={axiosApi} class="submitReg2">Registrate</button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
         </div>
         <Footer/>
