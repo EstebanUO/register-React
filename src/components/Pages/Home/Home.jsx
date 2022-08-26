@@ -18,11 +18,6 @@ export const Home = () => {
     asyncFetchData();
 
   }, [])
-  
-  
-
-
-
 
   return (
     <div>
