@@ -4,7 +4,7 @@ import { Header } from '../../layouts/Header/Header'
 export const Home = () => {
 
   //Metodo GET con axios
-  const [apiList, setapiList] = useState("")
+  const [lista, setlista] = useState([])
 
   useEffect(() => {
     const apiURL = "https://backend-edw.herokuapp.com/usuarios"
@@ -13,6 +13,7 @@ export const Home = () => {
       const res = await fetch(apiURL)
       const data = await res.json()
       console.log(data);
+      setlista(data)
     }
     asyncFetchData();
 
@@ -34,8 +35,22 @@ export const Home = () => {
                       Optio quibusdam dolores magnam dolore qui odit 
                       cum voluptatem eos incidunt eligendi velit, 
                       labore ullam veritatis!
-                  </p>
-                  <p className="lista"></p>
+                  </p><br /><br />
+                  <table className="listarApi">
+                    <tr>
+                      <th>User name</th>
+                      <th>Name</th>
+                      <th>Password</th>
+                    </tr>
+                    {lista.map(listaApi =>(
+                          <tr>
+                            <td>{listaApi[1]}</td>
+                            <td>{listaApi[2]}</td>
+                            <td>{listaApi[3]}</td>
+                          </tr>
+                    ))}
+                  </table>
+                    
             </div>    
     </div>
   )

@@ -56,6 +56,9 @@ export const Register = () => {
 
   }, [validName, validEmail, confirmPassword, password, email2, userName, password]);
 
+
+  const [messageApis, setmessageApis] = useState("")
+
   const axiosApi = () => {
     axios.post('https://backend-edw.herokuapp.com/usuario', 
     {
@@ -64,7 +67,9 @@ export const Register = () => {
       "name": email2,
     })
     .then (response => {
-      console.log(response);
+      console.log(response.data);
+      let messageApi = response.data
+      setmessageApis(messageApi)
     })
     .catch(function (error) {
       console.log(error);
@@ -101,25 +106,26 @@ export const Register = () => {
                 <div className="formularioReg">
                   <label for="inputUser" class="labelsReg">User name</label>
                     <input name="name" type="text" class="form-input" placeholder="User name" value={userName} onChange={onUserName} />
-                    <p>{validName}</p>
+                    <p class="errorMsg">{validName}</p><br />
+                    <p class="">{messageApis.Message}</p>
                     
                   <label for="exampleInputEmail1" class="labelsReg"><br/>Email</label>
                     <input name="correo" type="email" class="form-input" id="exampleInputEmail1" value={email2} onChange={onEmail} placeholder="Example@" />
-                    <p>{validEmail}</p>
+                    <p class="errorMsg">{validEmail}</p>
 
                   <label for="inputPassword" class="labelsReg"><br/>Password</label>
                   <div className="showPass">
                     <input name="password" type={showPass ? "text" : "password"} class="form-input" placeholder="Password" value={password} onChange={onPassword} />
                     <button className='button-show' onClick={iconShow}>{showPass ? <BsEyeFill />:<BsEyeSlashFill />}</button><br />
                   </div>
-                  <p id="validPassword"></p>
+                  <p class="errorMsg" id="validPassword"></p>
 
                   <label for="inputPassword" class="labelsReg"><br/>Confirm password</label>
                     <input name="password" type="password" class="form-input" placeholder="Confirm your password" value={confirmPassword} onChange={onConfirmPass} />
                     <p id="validPassword"></p>
                   <br />
                   <div className="checkTyC">
-                    <input type="checkbox" required/><p>Haz click aqui para aceptar nuestros<br/>terminos y condiciones.</p>
+                    <input type="checkbox"/><p>Haz click aqui para aceptar nuestros<br/>terminos y condiciones.</p>
                   </div>
                   
                   <div className="submitReg">
